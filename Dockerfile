@@ -1,5 +1,8 @@
 FROM node:14-slim
 
+LABEL maintainer="krolik.cz@gmail.com"
+LABEL repo="https://github.com/kroleek/aws-azure-login"
+
 # Install Puppeteer dependencies: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch
 RUN apt-get update \
    && apt-get install -y \
@@ -40,9 +43,7 @@ RUN apt-get update \
    libnss3 \
    lsb-release \
    xdg-utils \
-   wget \
-   && apt-get -q -y clean \
-   && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+   wget
 
 COPY package.json yarn.lock /aws-azure-login/
 
