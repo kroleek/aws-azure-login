@@ -279,6 +279,19 @@ const states = [
     },
   },
   {
+    name: "Choose verification method",
+    selector: "#idDiv_SAOTCS_Title",
+    async handler(page: puppeteer.Page) {
+      // select SMS
+      await page.click(`[data-value="OneWaySMS"]`);
+
+      debug("Click on OneWaySMS");
+
+      debug("Waiting for a delay");
+      await Bluebird.delay(500);
+    },
+  },
+  {
     name: "TFA instructions",
     selector: `#idDiv_SAOTCAS_Description`,
     async handler(
