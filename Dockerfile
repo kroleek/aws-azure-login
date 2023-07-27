@@ -1,7 +1,13 @@
+FROM node:14-slim as build
+
+WORKDIR /app
+COPY . .
+RUN yarn install && yarn test && yarn build
+
 FROM node:14-slim
 
-LABEL maintainer="krolik.cz@gmail.com"
 LABEL repo="https://github.com/kroleek/aws-azure-login"
+LABEL maintainer="krolik.cz@gmail.com"
 
 # Install Puppeteer dependencies: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch
 RUN apt-get update \
@@ -50,6 +56,6 @@ COPY package.json yarn.lock /aws-azure-login/
 RUN cd /aws-azure-login \
    && yarn install --production
 
-COPY lib /aws-azure-login/lib
+COPY --from=build  /app/lib /aws-azure-login/lib
 
 ENTRYPOINT ["node", "/aws-azure-login/lib", "--no-sandbox"]
