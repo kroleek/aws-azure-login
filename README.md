@@ -211,3 +211,9 @@ On Windows:
 ## Support for Other Authentication Providers
 
 Obviously, this tool only supports Azure AD as an identity provider. However, there is a lot of similarity with how other logins with other providers would work (especially if they are SAML providers). If you are interested in building support for a different provider let me know. It would be great to build a more generic AWS CLI login tool with plugins for the various providers.
+
+
+## Build
+
+docker build -t kroleek/aws-azure-login --platform=amd64 --no-cache .
+docker push kroleek/aws-azure-login
